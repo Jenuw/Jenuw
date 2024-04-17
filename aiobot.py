@@ -1,7 +1,9 @@
 import asyncio
-from aiogram import Bot, Dispatcher, types
-from aiogram.filters.command import Command
+from aiogram import Bot,Dispatcher
+import logging
 from config import TOKEN_AIOBOT
+from comands import router
+
 
 # Включаем логирование, чтобы не пропустить важные сообщения
 
@@ -11,16 +13,16 @@ bot = Bot(TOKEN_AIOBOT)
 dp = Dispatcher()
 
 
-# Хэндлер на команду /start
-@dp.message(Command("start"))
-async def cmd_start(message: types.Message):
-    await message.answer("Hello!")
-
 
 # Запуск процесса поллинга новых апдейтов
 async def main():
     await dp.start_polling(bot)
+    dp.include_router(router)
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    logging.basicConfig(level=logging.INFO)
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print('Exit')
