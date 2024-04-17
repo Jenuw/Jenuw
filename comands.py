@@ -4,10 +4,12 @@ from aiogram.types import Message
 
 router = Router()
 
-
-@router.message(CommandStart())
+@router.message(Command("start"))
 async def cmd_start(message: Message):
-    await message.answer(f'Привет {message.from_user.first_name} я бот.')
+    await message.answer("Hello!")
 
+@router.message(Command('help'))
+async def cmm_help(message: Message):
+    await message.answer('в данный момент этот бот ничего не умеет')
 
 
