@@ -14,11 +14,10 @@ bot = Bot(os.getenv('TOKEN'))
 dp = Dispatcher()
 
 
-# Хэндлер на команду /start
 
 
 
-# Запуск процесса поллинга новых апдейтов
+
 async def main():
     dp.include_router(router)
     await dp.start_polling(bot)
